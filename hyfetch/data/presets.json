@@ -243,6 +243,10 @@
     "colors": ["#9C9C9C", "#FCFCFC", "#FDE8BD", "#FCD25C", "#FB5A24", "#FCD25C", "#FDE8BD", "#FCFCFC", "#9C9C9C"],
     "weights": [4, 3, 3, 2, 1, 2, 3, 3, 4]
   },
+  "paragenderalt":["#9E9E9E", "#FFFFFF", "#68CAB0", "#FFEBAD", "#68CAB0", "#FFFFFF", "#9E9E9E"],
+  "paraboyalt":["#9E9E9E", "#FFFFFF", "#D190E5", "#4F2ECA", "#D190E5", "#FFFFFF", "#9E9E9E"],
+  "paragirlalt":["#9E9E9E", "#FFFFFF", "#FFA07F", "#F43C3A", "#FFA07F", "#FFFFFF", "#9E9E9E"],
+  "paranonbinaryalt":["#C9C9C9", "#F4F4F4", "#FFFCC0", "#FFB4EE", "#C267FF", "#8B4EFF"],
   "cupiorose":["#A0A0A0", "#C7BFE8", "#FFFFFF", "#B6C1DC"],
   "cupioromantic":["#FCAAA4", "#FDC6C1", "#FFFFFF", "#C9C0E7", "#A1A1A1"],
   "cupiosexual":["#A0A0A0", "#C7BFE8", "#FFFFFF", "#FFB3DA"],
