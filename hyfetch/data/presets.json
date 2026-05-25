@@ -227,10 +227,22 @@
   "autism":["#C94A49", "#DE7554", "#DBB667", "#6FA35D", "#2E7574", "#232828"],
   "cenelian":["#FFE7B6", "#93554A", "#52203A", "#7E4A93", "#99AFD6"],
   "transneutral":["#74DFFF", "#FFFDB3", "#FFFC75", "#FFF200", "#FFFC75", "#FFFDB3", "#FE8CBF"],
-  "paragender":["#9E9E9E", "#FFFFFF", "#68CAB0", "#FFEBAD", "#68CAB0", "#FFFFFF", "#9E9E9E"],
-  "paraboy":["#9E9E9E", "#FFFFFF", "#D190E5", "#4F2ECA", "#D190E5", "#FFFFFF", "#9E9E9E"],
-  "paragirl":["#9E9E9E", "#FFFFFF", "#FFA07F", "#F43C3A", "#FFA07F", "#FFFFFF", "#9E9E9E"],
-  "paranonbinary":["#C9C9C9", "#F4F4F4", "#FFFCC0", "#FFB4EE", "#C267FF", "#8B4EFF"],
+  "paragender": {
+    "colors": ["#9C9C9C", "#FFFFFF", "#BDE4D7", "#63BFA1", "#F3EE94", "#63BFA1", "#BDE4D7", "#FFFFFF", "#9C9C9C"],
+    "weights": [4, 3, 3, 2, 1, 2, 3, 3, 4]
+  },
+  "paraboy": {
+    "colors": ["#9C9C9C", "#FFFFFF", "#BDE4D7", "#63BFA1", "#F3EE94", "#63BFA1", "#BDE4D7", "#FFFFFF", "#9C9C9C"],
+    "weights": [4, 3, 3, 2, 1, 2, 3, 3, 4]
+  },
+  "paragirl": {
+    "colors": ["#9D9D9D", "#FFFFFF", "#FCCDBD", "#FC8D5C", "#FC1F4B", "#FC8D5C", "#FCCDBD", "#FFFFFF", "#9D9D9D"],
+    "weights": [4, 3, 3, 2, 1, 2, 3, 3, 4]
+  },
+  "paranonbinary": {
+    "colors": ["#9C9C9C", "#FCFCFC", "#FDE8BD", "#FCD25C", "#FB5A24", "#FCD25C", "#FDE8BD", "#FCFCFC", "#9C9C9C"],
+    "weights": [4, 3, 3, 2, 1, 2, 3, 3, 4]
+  },
   "cupiorose":["#A0A0A0", "#C7BFE8", "#FFFFFF", "#B6C1DC"],
   "cupioromantic":["#FCAAA4", "#FDC6C1", "#FFFFFF", "#C9C0E7", "#A1A1A1"],
   "cupiosexual":["#A0A0A0", "#C7BFE8", "#FFFFFF", "#FFB3DA"],
