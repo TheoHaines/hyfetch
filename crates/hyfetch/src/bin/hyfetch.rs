@@ -511,11 +511,17 @@ fn create_config(
     // Create flag lines
     let mut flags = Vec::with_capacity(Preset::COUNT);
     let spacing = {
-        let spacing = <Preset as VariantNames>::VARIANTS
+        let max_name_width = <Preset as VariantNames>::VARIANTS
             .iter()
             .map(|name| name.chars().count())
             .max()
             .expect("preset name iterator should not be empty");
+        let max_color_width = <Preset as VariantArray>::VARIANTS
+            .iter()
+            .map(|preset| preset.color_profile().colors.len())
+            .max()
+            .expect("preset iterator should not be empty");
+        let spacing = cmp::max(cmp::max(max_name_width, max_color_width), 20);
         let spacing: u8 = spacing.try_into().expect("`spacing` should fit in `u8`");
         cmp::max(spacing, 20)
     };
@@ -544,7 +550,7 @@ fn create_config(
     // Calculate flags per row
     let (flags_per_row, rows_per_page) = {
         let (Width(term_w), Height(term_h)) = terminal_size().context("failed to get term size")?;
-        let flags_per_row = (term_w / (spacing as u16 + 2)).clamp(0, u8::MAX.into()) as u8;
+        let flags_per_row = (term_w / (spacing as u16 + 2)).clamp(1, u8::MAX.into()) as u8;
         let rows_per_page = (term_h.saturating_sub(13) / 5).clamp(1, u8::MAX.into()) as u8;
         (flags_per_row, rows_per_page)
     };

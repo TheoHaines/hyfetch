@@ -232,7 +232,7 @@
     "weights": [4, 3, 3, 2, 1, 2, 3, 3, 4]
   },
   "paraboy": {
-    "colors": ["#9C9C9C", "#FFFFFF", "#BDE4D7", "#63BFA1", "#F3EE94", "#63BFA1", "#BDE4D7", "#FFFFFF", "#9C9C9C"],
+    "colors": ["#9C9C9C", "#FFFFFF", "#E4CCEC", "#C48CD4", "#0809C3", "#C48CD4", "#E4CCEC", "#FFFFFF", "#9C9C9C"],
     "weights": [4, 3, 3, 2, 1, 2, 3, 3, 4]
   },
   "paragirl": {
