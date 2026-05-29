@@ -128,7 +128,11 @@ def create_config() -> Config:
     # 3. Choose preset
     # Create flags = [[lines]]
     flag_entries = []
-    spacing = max(max(len(k) for k in PRESETS.keys()), 20)
+    spacing = max(
+        max(len(k) for k in PRESETS.keys()),
+        max(len(preset.colors) for preset in PRESETS.values()),
+        20,
+    )
     for name, preset in PRESETS.items():
         flag = preset.color_text(' ' * spacing, foreground=False)
         flag_entries.append((name, [name.center(spacing), flag, flag, flag], name.lower()))
