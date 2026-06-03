@@ -65,7 +65,7 @@ jobs:
             echo "source_ref=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ steps.release-refs.outputs.source_ref }}
 
@@ -83,7 +83,7 @@ jobs:
       github_release_exists: ${{ steps.state.outputs.github_release_exists }}
       github_release_complete: ${{ steps.state.outputs.github_release_complete }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.metadata.outputs.source_ref }}
 
@@ -189,11 +189,11 @@ jobs:
         )
       }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.metadata.outputs.source_ref }}
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -208,7 +208,7 @@ jobs:
         run: tools/build_pkg.sh
 
       - name: Upload distribution artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: python-dist-${{ needs.metadata.outputs.version }}
           path: dist/*
@@ -233,11 +233,11 @@ jobs:
         && needs.release-state.outputs.github_release_complete != 'true'
       }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.metadata.outputs.source_ref }}
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: python-dist-${{ needs.metadata.outputs.version }}
           path: dist
@@ -317,13 +317,13 @@ jobs:
         && needs.release-state.outputs.pypi_exists != 'true'
       }}
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: python-dist-${{ needs.metadata.outputs.version }}
           path: dist
 
       - name: Publish distributions
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@v1.14.0
         with:
           packages-dir: dist
           skip-existing: true
@@ -346,13 +346,14 @@ jobs:
         && needs.release-state.outputs.npm_exists != 'true'
       }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.metadata.outputs.source_ref }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: "24"
+          package-manager-cache: false
 
       - name: Use npm with trusted publishing support
         run: npm install -g npm@11
