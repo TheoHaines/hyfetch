@@ -7160,7 +7160,11 @@ get_distro_ascii() {
     # This function gets the distro ascii art and colors.
     #
     # $ascii_distro is the same as $distro.
-    case $(trim "$ascii_distro") in
+    local distro_ascii
+    distro_ascii=$(trim "$ascii_distro")
+
+    local IFS=
+    case $distro_ascii in
         "Adélie"* | "Adelie"*)
             set_colors 4 7 6
             read -rd '' ascii_data <<'EOF'
