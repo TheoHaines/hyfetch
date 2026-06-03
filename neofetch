@@ -1709,7 +1709,8 @@ get_model() {
                     MacPro4,1):             "Mac Pro (Early 2009)" ;;
                     iMac21,[1-2]):          "iMac (24-inch, M1, 2021)" ;;
                     iMac20,[1-2]):          "iMac (Retina 5K, 27-inch, 2020)" ;;
-                    iMac19,[1-2]):          "iMac (Retina 4K, 21.5-inch, 2019)" ;;
+                    iMac19,1):              "iMac (Retina 5K, 27-inch, 2019)" ;;
+                    iMac19,2):              "iMac (Retina 4K, 21.5-inch, 2019)" ;;
                     iMacPro1,1):            "iMac Pro (2017)" ;;
                     iMac18,3):              "iMac (Retina 5K, 27-inch, 2017)" ;;
                     iMac18,2):              "iMac (Retina 4K, 21.5-inch, 2017)" ;;
@@ -2130,6 +2131,63 @@ get_packages() {
             pac "$((pkgs-pkgs_h))";
         fi
     }
+    pkgx_packages=0
+    tea_packages=0
+    is_external_package_manager() {
+        case $1 in
+            pkgx) ((pkgx_packages > 0)) ;;
+            tea)  ((tea_packages > 0)) ;;
+            *)    return 1 ;;
+        esac
+    }
+    count_brew_packages() {
+        local brew_cellar brew_caskroom package path
+        local -a brew_pkgs filtered_pkgs
+
+        brew_cellar=$(brew --cellar) || return
+        brew_caskroom=$(brew --caskroom) || brew_caskroom=
+
+        if shopt -q nullglob; then
+            brew_pkgs=("$brew_cellar"/*)
+            [[ $brew_caskroom ]] && brew_pkgs+=("$brew_caskroom"/*)
+        else
+            shopt -s nullglob
+            brew_pkgs=("$brew_cellar"/*)
+            [[ $brew_caskroom ]] && brew_pkgs+=("$brew_caskroom"/*)
+            shopt -u nullglob
+        fi
+
+        for path in "${brew_pkgs[@]}"; do
+            package=${path##*/}
+            is_external_package_manager "$package" && continue
+            filtered_pkgs+=("$path")
+        done
+
+        dir "${filtered_pkgs[@]}"
+    }
+    count_pkgx_packages() {
+        local packages_before pkgx_pkgs
+
+        packages_before=${packages:-0}
+
+        if has pkgx && [[ -d "$HOME/.local/bin" ]]; then
+            pkgx_pkgs="$(
+                awk '
+                    match($0, /exec pkgx \+[^ ]+/) {
+                        prefix = "exec pkgx +"
+                        print substr($0, RSTART + length(prefix), RLENGTH - length(prefix))
+                    }
+                ' "$HOME"/.local/bin/* 2>/dev/null | sort -u
+            )"
+            [[ $pkgx_pkgs ]] && tot printf "%s\n" "$pkgx_pkgs"
+        fi
+        ((pkgx_packages+=packages-packages_before))
+
+        packages_before=${packages:-0}
+        has tea && [[ -d "$HOME/.tea" ]] &&
+            tot find "$HOME/.tea" -maxdepth 2 -mindepth 2 -type d
+        ((tea_packages+=packages-packages_before))
+    }
 
     # Redefine tot() and dir() for Bedrock Linux.
     [[ -f /bedrock/etc/bedrock-release && $PATH == */bedrock/cross/* ]] && {
@@ -2191,12 +2249,7 @@ get_packages() {
         fi
     fi
 
-    if has pkgx && [[ -d "$HOME/.local/bin" ]]; then
-        # https://github.com/pkgxdev/pkgx/issues/985#issuecomment-2080999008
-        _pkgxpkgs="$(grep -rIhoP 'exec pkgx \+\K[^ ]+' "$HOME/.local/bin" | sort -u)"
-        tot echo "$_pkgxpkgs"
-        unset _pkgxpkgs
-    fi
+    count_pkgx_packages
 
     # OS-specific package managers.
     case $os in
@@ -2251,7 +2304,7 @@ get_packages() {
             # shellcheck disable=SC2086
             {
             shopt -s nullglob
-            has brew    && dir "$(brew --cellar)/* $(brew --caskroom)/*"
+            has brew    && count_brew_packages
             has emerge  && dir "/var/db/pkg/*/*"
             has Compile && dir "/Programs/*/"
             has eopkg   && dir "/var/lib/eopkg/package/*"
@@ -2382,7 +2435,7 @@ get_packages() {
 
         "Mac OS X"|"macOS"|MINIX)
             has port  && pkgs_h=1 tot port installed && ((packages-=1))
-            has brew  && dir "$(brew --cellar)/* $(brew --caskroom)/*"
+            has brew  && count_brew_packages
             has pkgin && tot pkgin list
             has dpkg  && tot dpkg-query -f '.\n' -W
 
