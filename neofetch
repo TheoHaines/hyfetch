@@ -881,8 +881,9 @@ image_source="auto"
 # Fedora Sericea, Fedora Silverblue, Fedora_unicode, FemboyOS, Feren, Finnix, Floflis, FreeBSD,
 # FreeMiNT, Frugalware, Funtoo, Furreto, GalliumOS, Garuda, Gentoo, GhostBSD, glaucus, Gloire,
 # gNewSense, GNOME, GNU, GoboLinux, GrapheneOS, Grombyang, Guix, Haiku, HamoniKR, HarDClanZ, Hash,
-# Huayra, Hybrid, HydroOS, Hyperbola, iglunix, instantOS, Interix, IRIX, Itc, januslinux, Kaisen,
-# Kali, KaOS, KDE, Kibojoe, Kogaion, Korora, KrassOS, KSLinux, Kubuntu, LainOS, LangitKetujuh,
+# Huayra, Hybrid, HydroOS, Hyperbola, iglunix, Imaginary Linux, instantOS, Interix, IRIX, Itc,
+# januslinux, Kaisen, Kali, KaOS, KDE, Kibojoe, Kogaion, Korora, KrassOS, KSLinux, Kubuntu, LainOS,
+# LangitKetujuh,
 # LaxerOS, LEDE, LibreELEC, Linspire, Linux, Linux Lite, Linux Mint, Linux Mint Old,
 # LinuxFromScratch, Live Raizo, LMDE, Lubuntu, Lunar, mac, MacaroniOS, Mageia, Magix, MagpieOS,
 # MainsailOS, Mandriva, Manjaro, MassOS, MatuusOS, Maui, Mauna, Meowix, Mer, MidOS, Minix,
@@ -6748,8 +6749,9 @@ ASCII:
                                 Funtoo, Furreto, GalliumOS, Garuda, Gentoo, GhostBSD, glaucus,
                                 Gloire, gNewSense, GNOME, GNU, GoboLinux, GrapheneOS, Grombyang,
                                 Guix, Haiku, HamoniKR, HarDClanZ, Hash, Huayra, Hybrid, HydroOS,
-                                Hyperbola, iglunix, instantOS, Interix, IRIX, Itc, januslinux,
-                                Kaisen, Kali, KaOS, KDE, Kibojoe, Kogaion, Korora, KrassOS, KSLinux,
+                                Hyperbola, iglunix, Imaginary Linux, instantOS, Interix, IRIX, Itc,
+                                januslinux, Kaisen, Kali, KaOS, KDE, Kibojoe, Kogaion, Korora,
+                                KrassOS, KSLinux,
                                 Kubuntu, LainOS, LangitKetujuh, LaxerOS, LEDE, LibreELEC, Linspire,
                                 Linux, Linux Lite, Linux Mint, Linux Mint Old, LinuxFromScratch,
                                 Live Raizo, LMDE, Lubuntu, Lunar, mac, MacaroniOS, Mageia, Magix,
@@ -10902,6 +10904,21 @@ ${c1}     |
  \    /        /
   \  /        /
    \/________/
+EOF
+        ;;
+
+        "Imaginary Linux"* | "Imaginary"* | "imaginary"* | "Linux Imaginary"* | "LinuxImaginary"* | "linuximaginary"*)
+            set_colors 5
+            read -rd '' ascii_data <<'EOF'
+${c1}   ████▓▓▒▒      ▒▒▓▓████
+  ████▓▓▓▒▒      ▒▒▓▓▓████
+ ████▓▓▓▓▒▒      ▒▒▓▓▓▓████
+████▓▓▓▓▒▒   ██   ▒▒▓▓▓▓████
+███▓▓▓▒▒     ██     ▒▒▓▓▓███
+██▓▓▒▒       ██       ▒▒▓▓██
+█▓▒          ██          ▒▓█
+▒                          ▒
+       IMAGINARY LINUX
 EOF
         ;;
 
