@@ -198,15 +198,16 @@ class RGB:
         """
         raise NotImplementedError()
 
-    def to_ansi(self, mode: AnsiMode | None = None, foreground: bool = True):
+    def to_ansi(self, mode: AnsiMode | None = None, foreground: bool = True) -> str:
         if not mode:
             mode = GLOBAL_CFG.color_mode
         if mode == 'rgb':
             return self.to_ansi_rgb(foreground)
         if mode == '8bit':
             return self.to_ansi_8bit(foreground)
-        if mode == 'ansi':
-            return self.to_ansi_16(foreground)
+        # 'ansi' (16-color) is not yet implemented; fall back to 8bit which always works.
+        # 'default' and any unknown mode also fall through here as a safe degradation.
+        return self.to_ansi_8bit(foreground)
 
     def lighten(self, multiplier: float) -> 'RGB':
         """
